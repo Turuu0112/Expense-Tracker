@@ -1,12 +1,12 @@
-import {
-  createCategory,
-  getAllCategories,
+// import {
+//   createCategory,
+//   getAllCategories,
  
-} from "../controllers/categories.controller.js";
-import { Router } from "express";
+// } from "../controllers/categories.controller.js";
+// import { Router } from "express";
 
-const postsRouter = Router();
+// const postsRouter = Router();
 
-postsRouter.get("/", getAllCategories).post("/", createCategory);
+// postsRouter.get("/", getAllCategories).post("/", createCategory);
 
-export { postsRouter };
+// export { postsRouter };

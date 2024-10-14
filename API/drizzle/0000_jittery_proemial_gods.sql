@@ -3,8 +3,8 @@ CREATE TABLE IF NOT EXISTS "categories" (
 	"name" varchar(256),
 	"color" varchar(256),
 	"icon_name" varchar(256),
-	"updatedAt" timestamp,
-	"createdAt" timestamp
+	"updated_at" timestamp,
+	"created_at" timestamp
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "records" (

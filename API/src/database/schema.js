@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { integer, PgSerial, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
+import { integer,  pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
 
 
 
@@ -30,8 +30,8 @@ export const categories = pgTable("categories", {
   name: varchar("name", { length: 256 }),
   color: varchar("color", { length: 256 }),
   icon_name: varchar("icon_name", { length: 256 }),
-  updatedAt: timestamp("updatedAt"),
-  createdAt: timestamp("createdAt"),
+  updatedAt: timestamp("updated_at"),
+  createdAt: timestamp("created_at"),
 });
 
  export const usersRelations = relations(users, ({ many }) => ({
