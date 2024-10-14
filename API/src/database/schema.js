@@ -1,9 +1,14 @@
 import { relations } from "drizzle-orm";
-import { integer, PgSerial, pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
+import {
+  integer,
+  PgSerial,
+  pgTable,
+  serial,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 
-
-
- export const users = pgTable("users", {
+export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
   password: varchar("password", { length: 256 }).notNull(),
@@ -34,7 +39,7 @@ export const categories = pgTable("categories", {
   createdAt: timestamp("createdAt"),
 });
 
- export const usersRelations = relations(users, ({ many }) => ({
+export const usersRelations = relations(users, ({ many }) => ({
   records: many(records),
 }));
 
@@ -52,4 +57,3 @@ export const recordsRelations = relations(records, ({ one }) => ({
     references: [categories.id],
   }),
 }));
-
