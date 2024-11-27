@@ -1,9 +1,13 @@
-import { relations } from "drizzle-orm";
-import { integer,  pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-core";
+const { relations } = require("drizzle-orm");
+const {
+  integer,
+  pgTable,
+  serial,
+  timestamp,
+  varchar,
+} = require("drizzle-orm/pg-core");
 
-
-
- export const users = pgTable("users", {
+const users = pgTable("users", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }).notNull(),
   password: varchar("password", { length: 256 }).notNull(),
@@ -13,7 +17,7 @@ import { integer,  pgTable, serial, timestamp, varchar } from "drizzle-orm/pg-co
   updatedAt: timestamp("updatedAt"),
   createdAt: timestamp("createdAt"),
 });
-export const records = pgTable("records", {
+const records = pgTable("records", {
   id: serial("id").primaryKey(),
   userId: integer("userId"),
   categoryId: integer("categoryId"),
@@ -25,24 +29,24 @@ export const records = pgTable("records", {
   createdAt: timestamp("createdAt"),
 });
 
-export const categories = pgTable("categories", {
+const categories = pgTable("categories", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 256 }),
   color: varchar("color", { length: 256 }),
   icon_name: varchar("icon_name", { length: 256 }),
-  updatedAt: timestamp("updated_at"),
-  createdAt: timestamp("created_at"),
+  updatedAt: timestamp("updatedAt"),
+  createdAt: timestamp("createdAt"),
 });
 
- export const usersRelations = relations(users, ({ many }) => ({
+const usersRelations = relations(users, ({ many }) => ({
   records: many(records),
 }));
 
-export const categoryRelations = relations(categories, ({ many }) => ({
+const categoryRelations = relations(categories, ({ many }) => ({
   records: many(records),
 }));
 
-export const recordsRelations = relations(records, ({ one }) => ({
+const recordsRelations = relations(records, ({ one }) => ({
   user: one(users, {
     fields: [records.userId],
     references: [users.id],
@@ -52,4 +56,11 @@ export const recordsRelations = relations(records, ({ one }) => ({
     references: [categories.id],
   }),
 }));
-
+module.exports = {
+  users,
+  records,
+  categories,
+  usersRelations,
+  recordsRelations,
+  categoryRelations,
+};

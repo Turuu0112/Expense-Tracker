@@ -1,4 +1,3 @@
-
 const { db } = require("../database");
 const { records } = require("../database/schema");
 
