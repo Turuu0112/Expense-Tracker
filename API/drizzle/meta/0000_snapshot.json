@@ -1,5 +1,5 @@
 {
-  "id": "80ed6741-d719-48a7-9d2e-70afd27ed697",
+  "id": "8065d916-d357-41c0-8d6c-4f3b6e30453a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,21 +10,16 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "'08c1a8e2-a5f6-4d14-8442-d5353fb77413'"
         },
         "name": {
           "name": "name",
           "type": "varchar(256)",
           "primaryKey": false,
-          "notNull": true
-        },
-        "password": {
-          "name": "password",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "email": {
           "name": "email",
@@ -32,28 +27,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "currency_type": {
-          "name": "currency_type",
+        "password": {
+          "name": "password",
           "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "'MNT'"
-        },
-        "avatar_img": {
-          "name": "avatar_img",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         }
@@ -77,30 +53,72 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "'1b501a1d-99cd-462f-8ce6-eb282c934b95'"
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "icon": {
+          "name": "icon",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "iconColor": {
+          "name": "iconColor",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
         },
         "userId": {
           "name": "userId",
-          "type": "integer",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": false
-        },
-        "categoryId": {
-          "name": "categoryId",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.iconcategories": {
+      "name": "iconcategories",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "'c5e3ef1d-1d20-4741-92b4-3779b9a72f3f'"
         },
         "amount": {
           "name": "amount",
-          "type": "integer",
+          "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
         },
-        "transaction_type": {
-          "name": "transaction_type",
+        "category": {
+          "name": "category",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date": {
+          "name": "date",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        " time": {
+          "name": " time",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
@@ -111,67 +129,21 @@
           "primaryKey": false,
           "notNull": false
         },
-        "note": {
-          "name": "note",
+        "note ": {
+          "name": "note ",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
         },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "public.categories": {
-      "name": "categories",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
+        "status": {
+          "name": "status",
           "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
         },
-        "color": {
-          "name": "color",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "icon_name": {
-          "name": "icon_name",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp",
+        "userId": {
+          "name": "userId",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": false
         }

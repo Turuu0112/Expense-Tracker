@@ -2,10 +2,14 @@ const { Router } = require("express");
 const {
   getAllRecords,
   createRecord,
+  deleteRecord,
 } = require("../controllers/record.controller");
 
-const recordRouter = Router();
+const recordsRouter = Router();
 
-recordRouter.get("/:user", getAllRecords);
-recordRouter.post("/", createRecord);
-module.exports = { recordRouter };
+recordsRouter
+  .get("/", getAllRecords)
+  .post("/", createRecord)
+  .delete("/:id", deleteRecord);
+
+module.exports = { recordsRouter };

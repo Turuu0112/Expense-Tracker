@@ -1,48 +1,36 @@
 const { relations } = require("drizzle-orm");
-const {
-  integer,
-  pgTable,
-  serial,
-  timestamp,
-  varchar,
-} = require("drizzle-orm/pg-core");
+const { date } = require("drizzle-orm/mysql-core");
+const { pgTable, varchar, uuid, integer } = require("drizzle-orm/pg-core");
+const { v4: uuidv4 } = require("uuid"); // Import the UUID v4 generator
 
 const users = pgTable("users", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 256 }).notNull(),
-  password: varchar("password", { length: 256 }).notNull(),
-  email: varchar("email", { length: 256 }).notNull().unique(),
-  currency_type: varchar("currency_type", { length: 256 }).default("MNT"),
-  avatar_img: varchar("avatar_img", { length: 256 }),
-  updatedAt: timestamp("updatedAt"),
-  createdAt: timestamp("createdAt"),
-});
-const records = pgTable("records", {
-  id: serial("id").primaryKey(),
-  userId: integer("userId"),
-  categoryId: integer("categoryId"),
-  amount: integer("amount"),
-  transaction_type: varchar("transaction_type", { length: 256 }),
-  payee: varchar("payee", { length: 256 }),
-  note: varchar("note", { length: 256 }),
-  updatedAt: timestamp("updatedAt"),
-  createdAt: timestamp("createdAt"),
+  id: uuid("id").primaryKey().default(uuidv4()), // Generate UUID here
+  name: varchar("name", { length: 256 }),
+  email: varchar("email", { length: 256 }).unique().notNull(),
+  password: varchar("password", { length: 256 }), // Add the password column
 });
 
-const categories = pgTable("categories", {
-  id: serial("id").primaryKey(),
-  name: varchar("name", { length: 256 }),
-  color: varchar("color", { length: 256 }),
-  icon_name: varchar("icon_name", { length: 256 }),
-  updatedAt: timestamp("updatedAt"),
-  createdAt: timestamp("createdAt"),
+const records = pgTable("records", {
+  id: uuid("id").primaryKey().default(uuidv4()),
+  title: varchar("title", { length: 256 }),
+  icon: varchar("icon", { length: 256 }),
+  iconColor: varchar("iconColor", { length: 256 }),
+  userId: varchar("userId"),
+});
+
+const iconcategories = pgTable("iconcategories", {
+  id: uuid("id").primaryKey().default(uuidv4()),
+  amount: varchar("amount", { length: 256 }),
+  category: varchar("category", { length: 256 }),
+  date: varchar("date", { length: 256 }),
+  time: varchar(" time", { length: 256 }),
+  payee: varchar("payee", { length: 256 }),
+  note: varchar("note ", { length: 256 }),
+  status: varchar("status", { length: 256 }),
+  userId: varchar("userId"),
 });
 
 const usersRelations = relations(users, ({ many }) => ({
-  records: many(records),
-}));
-
-const categoryRelations = relations(categories, ({ many }) => ({
   records: many(records),
 }));
 
@@ -51,16 +39,19 @@ const recordsRelations = relations(records, ({ one }) => ({
     fields: [records.userId],
     references: [users.id],
   }),
-  category: one(categories, {
-    fields: [records.categoryId],
-    references: [categories.id],
+}));
+const iconcategoriesRelations = relations(iconcategories, ({ one }) => ({
+  user: one(users, {
+    fields: [iconcategories.userId],
+    references: [users.id],
   }),
 }));
+
 module.exports = {
   users,
   records,
-  categories,
   usersRelations,
   recordsRelations,
-  categoryRelations,
+  iconcategories,
+  iconcategoriesRelations,
 };
